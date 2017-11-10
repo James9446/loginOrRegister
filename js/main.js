@@ -10,7 +10,7 @@ var userObject = {
 			this.password = password;
 	},
 	addProfile: function(obj) {
-		this.profiles.push(obj);
+		this.profiles.unshift(obj);
 	},
 	getUserData: function() {
 		var	newProfile;
@@ -61,7 +61,7 @@ function showProfile() {
 	// hide new profile form
 	document.getElementById('register-form').style.display = "none";
 	// display updated profile data
-	document.getElementById('showProfile').style.display = "block";
+	document.getElementById('show-profile').style.display = "block";
 }
 
 
@@ -69,7 +69,7 @@ function showProfile() {
 
 // Start by hiding the register form and profile
 document.getElementById('register-form').style.display = "none";
-document.getElementById('showProfile').style.display = "none";
+document.getElementById('show-profile').style.display = "none";
 
 function showRegistrationForm() {
 	// hide login form
@@ -85,9 +85,18 @@ function showLoginForm() {
 	document.getElementById('login-form').style.display = "block";
 }
 
+function signOut() {
+	// hide register form
+	document.getElementById('show-profile').style.display = "none";
+	// display login form
+	document.getElementById('login-form').style.display = "block";
+}
+
+
 // Event listeners for buttons
 document.getElementById('registerButton').addEventListener('click', showProfile, false);
 document.getElementById('showRegisterButton').addEventListener('click', showRegistrationForm, false);
 document.getElementById('showLoginButton').addEventListener('click', showLoginForm, false);
+document.getElementById('signOutButton').addEventListener('click', signOut, false);
 console.log(userObject.profiles);
 
