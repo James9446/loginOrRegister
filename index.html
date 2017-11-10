@@ -41,6 +41,10 @@
 				<div class="row justify-content-center">
 					<div class="form-group col-4">
 						<input type="text" id="user-first-name" class="form-control" placeholder="First Name">
+					</div>
+				</div>		
+				<div class="row justify-content-center">
+					<div class="form-group col-4">
 						<input type="text" id="user-last-name" class="form-control" placeholder="Last Name">
 					</div>
 				</div>
@@ -49,13 +53,13 @@
 					<div class="form-group">
 						Gender:
 						<label class="radio-inline">
-						  <input type="radio" name="radio1" class="userGender" value="male"> Male
+						  <input type="radio" name="radio1" class="user-gender" value="male"> Male  
 						</label>
 						<label class="radio-inline">
-						  <input type="radio" name="radio1" class="userGender" value="female"> Female
+						  <input type="radio" name="radio1" class="user-gender" value="female"> Female  
 						</label>
 						<label class="radio-inline">
-						  <input type="radio" name="radio1" class="userGender" value="Non-binary"> Non-binary
+						  <input type="radio" name="radio1" class="user-gender" value="Non-binary"> Non-binary
 						</label>
 					</div>
 				</div>
@@ -63,17 +67,35 @@
 				<!-- EMAIL -->
 				<div class="row justify-content-center">
 					<div class="form-group col-4">
-						<input type="email" id="userEmail" class="form-control" placeholder="Email Address">
+						<input type="email" id="user-email" class="form-control" placeholder="Email Address">
 					</div>
 				</div>
 
 				<!-- PHONE NUMBER -->
 				<div class="row justify-content-center">
 					<div class="form-group col-4">
-						<input type="number" id="userPhone" class="form-control" placeholder="Phone Number">
+						<input type="number" id="user-phone" class="form-control" placeholder="Phone Number">
 					</div>
 				</div>
 
+				<!-- LOGIN INFO -->
+				<div class="row justify-content-center">
+					<div class="form-group col-4">
+						<input type="text" id="choose-username" class="form-control" placeholder="Choose a username">
+					</div>
+				</div>		
+				<div class="row justify-content-center">
+					<div class="form-group col-4">
+						<input type="text" id="choose-password" class="form-control" placeholder="Choose a password">
+					</div>
+				</div>	
+				<div class="row justify-content-center">
+					<div class="form-group col-4">
+						<input type="text" id="confirm-password" class="form-control" placeholder="Confirm password">
+					</div>
+				</div>
+
+				<!-- BUTTONS -->
 				<div class="row justify-content-center">
 					<button class="btn btn-primary" id="showLoginButton">Login</button>
 					<button class="btn btn-primary" id="registerButton">Register</button>
@@ -81,7 +103,7 @@
 			</div>
 
 			<!-- User Profile -->
-			<div id="showProfile" class="row justify-content-center">
+			<div id="show-profile" class="row justify-content-center">
 				<!-- <div class="row justify-content-center"> -->
 					<h1>User Profile</h1>
 					<!-- updated profile -->
@@ -95,9 +117,11 @@
 						<h3 id="newUserEmail"></h3>
 					<!-- </div> -->
 					<!-- <div class="row justify-content-center"> -->
-						<h3 id="newUserPhone">
+						<h3 id="newUserPhone"></h3>
 					<!-- </div>	 -->
+						<h3 id="newUsername"></h3>
 				<!-- </div> -->
+						<button class="btn btn-primary" id="signOutButton">Sign Out</button>
 			</div><!-- /#showProfile -->
 
 		</div><!-- /container -->

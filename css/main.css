@@ -10,16 +10,8 @@ input {
 	border-radius: 5px;
 }
 
-/*.form-group .form-control {
-	margin: 10px 0;
-}*/
-
-.register-text {
-	margin: 35px 0 0 0;
-}
-
-#user-first-name, #user-last-name {
-	margin: 15px 0 0 0;
+#user-first-name, #user-last-name, #user-phone, #choose-username, #choose-password, #confirm-password {
+	margin-top: 2px;
 }
 
  #username, #password {
