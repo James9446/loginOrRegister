@@ -12,7 +12,6 @@ var userObject = {
 	},
 	getUserData: function() {
 		var	newProfile;
-
 		// store vaules for user first & last name, email and phone num
 		var userFirst     = document.getElementById('user-first-name').value;
 		var userLast      = document.getElementById('user-last-name').value;
@@ -20,7 +19,6 @@ var userObject = {
 		var userGenderEls = document.getElementsByClassName("userGender");
 		var	userPhone     = document.getElementById('userPhone').value;
 		var	userEmail     = document.getElementById('userEmail').value;
-
 		/*
 		GENDER
 		*/
@@ -32,24 +30,58 @@ var userObject = {
 				userGender = userGenderEls[i].value;
 			};
 		};
-
 		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone);
-		console.log(newProfile);
-
-		// this.addProfile(newProfile);
+		return userObject.addProfile(newProfile);
 	}
 }
 
+function showProfile() {
+	userObject.getUserData();
+	// make sure the user data is being passed through
+	console.log(userObject.profiles);
 
+	// select some HTML elements by id
+	var userName   = document.getElementById('newUserName');
+	var userGender = document.getElementById('newUserGender');
+	var	userEmail  = document.getElementById('newUserEmail');
+	var	userPhone  = document.getElementById('newUserPhone');
 
-function getUserData() {
-	
+	// change the text of these variables using the userProfile object
+	userName.innerText   = "Welcome " + userObject.profiles[0].firstName + " " + userObject.profiles[0].lastName;
+	userGender.innerText = "Gender: " + userObject.profiles[0].gender;
+	userEmail.innerText  = "Email: " + userObject.profiles[0].email;
+	userPhone.innerText  = "Phone: " + userObject.profiles[0].number;
+
+	// hide new profile form
+	document.getElementById('register-form').style.display = "none";
+	// display updated profile data
+	document.getElementById('showProfile').style.display = "block";
 }
 
-// add click function to element with id="register"
-document.getElementById('registerButton').addEventListener('click', userObject.getUserData, false);
 
+// ---=== Hide and show form functions ===--- // 
+
+// Start by hiding the register form and profile
+document.getElementById('register-form').style.display = "none";
+document.getElementById('showProfile').style.display = "none";
+
+function showRegistrationForm() {
+	// hide login form
+	document.getElementById('login-form').style.display = "none";
+	// display register form
+	document.getElementById('register-form').style.display = "block";
+}
+
+function showLoginForm() {
+	// hide register form
+	document.getElementById('register-form').style.display = "none";
+	// display login form
+	document.getElementById('login-form').style.display = "block";
+}
+
+// Event listeners for buttons
+document.getElementById('registerButton').addEventListener('click', showProfile, false);
+document.getElementById('showRegisterButton').addEventListener('click', showRegistrationForm, false);
+document.getElementById('showLoginButton').addEventListener('click', showLoginForm, false);
 console.log(userObject.profiles);
 
-// var testObject = new constructUserProfile("james", "reynolds", "male", "me@gmail.com", 123233444);
-// console.log(testObject);
