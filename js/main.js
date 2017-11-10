@@ -1,11 +1,13 @@
 var userObject = {
 	profiles: [],
-	constructUserProfile: function(firstName, lastName, gender, email, number) {
+	constructUserProfile: function(firstName, lastName, gender, email, number, username, password) {
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.gender = gender;
 			this.email = email;
 			this.number = number;
+			this.username = username;
+			this.password = password;
 	},
 	addProfile: function(obj) {
 		this.profiles.push(obj);
@@ -16,9 +18,11 @@ var userObject = {
 		var userFirst     = document.getElementById('user-first-name').value;
 		var userLast      = document.getElementById('user-last-name').value;
 		// store elements by class for radios and select - will loop through later to find user selection
-		var userGenderEls = document.getElementsByClassName("userGender");
-		var	userPhone     = document.getElementById('userPhone').value;
-		var	userEmail     = document.getElementById('userEmail').value;
+		var userGenderEls = document.getElementsByClassName("user-gender");
+		var	userPhone     = document.getElementById('user-phone').value;
+		var	userEmail     = document.getElementById('user-email').value;
+		var	username      = document.getElementById('choose-username').value;
+		var	userPassword  = document.getElementById('choose-password').value;
 		/*
 		GENDER
 		*/
@@ -30,7 +34,7 @@ var userObject = {
 				userGender = userGenderEls[i].value;
 			};
 		};
-		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone);
+		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
 		return userObject.addProfile(newProfile);
 	}
 }
@@ -45,12 +49,14 @@ function showProfile() {
 	var userGender = document.getElementById('newUserGender');
 	var	userEmail  = document.getElementById('newUserEmail');
 	var	userPhone  = document.getElementById('newUserPhone');
+	var username   = document.getElementById('newUsername');
 
 	// change the text of these variables using the userProfile object
 	userName.innerText   = "Welcome " + userObject.profiles[0].firstName + " " + userObject.profiles[0].lastName;
 	userGender.innerText = "Gender: " + userObject.profiles[0].gender;
 	userEmail.innerText  = "Email: " + userObject.profiles[0].email;
 	userPhone.innerText  = "Phone: " + userObject.profiles[0].number;
+	username.innerText   = "Username: " + userObject.profiles[0].username;
 
 	// hide new profile form
 	document.getElementById('register-form').style.display = "none";
