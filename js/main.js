@@ -12,6 +12,16 @@ var userObject = {
 	addProfile: function(obj) {
 		this.profiles.unshift(obj);
 	},
+	resetUserData: function () {
+		document.getElementById('user-first-name').value = '';
+		document.getElementById('user-last-name').value = '';
+		// store elements by class for radios and select - will loop through later to find user selection
+		document.getElementsByClassName("user-gender");
+		document.getElementById('user-phone').value = '';
+		document.getElementById('user-email').value = '';
+		document.getElementById('choose-username').value = '';
+		document.getElementById('choose-password').value = '';
+	},
 	getUserData: function() {
 		var	newProfile;
 		// store vaules for user first & last name, email and phone num
@@ -34,8 +44,15 @@ var userObject = {
 				userGender = userGenderEls[i].value;
 			};
 		};
-		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
-		return userObject.addProfile(newProfile);
+		for (i = 0; i < userObject.profiles.length; i++) {
+		if (this.profiles[i].username === username) {
+			return alert("Sorry the username " + username + ", has already been taken. Please select another!");
+			} else {
+				newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
+				this.resetUserData();
+				return userObject.addProfile(newProfile);
+			}
+		}
 	}
 }
 
