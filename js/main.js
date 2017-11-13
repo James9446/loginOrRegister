@@ -50,13 +50,37 @@ var userObject = {
 	}
 }
 
+function validatePassword (password) {
+	if (password.length < 6) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function confirmPassword(first, second) {
+	if (first === second) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function register() {
 	var newProfile = userObject.getUserData();
+	var	confirmPassword  = document.getElementById('confirm-password').value;
 	for (var i = 0; i < userObject.profiles.length; i++) {
 		if (newProfile.username === userObject.profiles[i].username) {
 			document.getElementById('choose-username').value = '';
-			return alert("This username is already in use");
+			return alert("Sorry the username " + newProfile.username + ", has already been taken. Please select another!");
 		}
+	}
+	if (!validatePassword(newProfile.password)) {
+		return alert("This not a valid password. \nYour password must be at least 6 characters long");
+	}
+	if (newProfile.password !== confirmPassword) {
+		document.getElementById('confirm-password').value = '';
+		return alert("Your confirm password entry did not match your password");
 	}
 	userObject.addProfile(newProfile);
 	userObject.resetUserData();
