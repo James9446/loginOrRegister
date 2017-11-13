@@ -44,15 +44,18 @@ var userObject = {
 				userGender = userGenderEls[i].value;
 			};
 		};
-		for (i = 0; i < userObject.profiles.length; i++) {
-		if (this.profiles[i].username === username) {
-			return alert("Sorry the username " + username + ", has already been taken. Please select another!");
-			} else {
-				newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
-				this.resetUserData();
-				return userObject.addProfile(newProfile);
-			}
-		}
+		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
+		this.resetUserData();
+		this.addProfile(newProfile);
+		// this.profiles.forEach(function (element) {
+		// 	if (username = element.username) {
+		// 		alert("Username taken")
+		// 	}
+		// }) 
+
+		// for (var i = 0; i < this.profiles.length; i++) {
+
+		// }
 	}
 }
 
