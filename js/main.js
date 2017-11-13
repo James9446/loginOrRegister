@@ -21,6 +21,7 @@ var userObject = {
 		document.getElementById('user-email').value = '';
 		document.getElementById('choose-username').value = '';
 		document.getElementById('choose-password').value = '';
+		document.getElementById('confirm-password').value = '';
 	},
 	getUserData: function() {
 		var	newProfile;
@@ -45,24 +46,27 @@ var userObject = {
 			};
 		};
 		newProfile = new userObject.constructUserProfile(userFirst, userLast, userGender, userEmail, userPhone, username, userPassword);
-		this.resetUserData();
-		this.addProfile(newProfile);
-		// this.profiles.forEach(function (element) {
-		// 	if (username = element.username) {
-		// 		alert("Username taken")
-		// 	}
-		// }) 
-
-		// for (var i = 0; i < this.profiles.length; i++) {
-
-		// }
+		return newProfile;
 	}
 }
 
+function register() {
+	var newProfile = userObject.getUserData();
+	for (var i = 0; i < userObject.profiles.length; i++) {
+		if (newProfile.username === userObject.profiles[i].username) {
+			document.getElementById('choose-username').value = '';
+			return alert("This username is already in use");
+		}
+	}
+	userObject.addProfile(newProfile);
+	userObject.resetUserData();
+	showProfile();
+}
+
 function showProfile() {
-	userObject.getUserData();
+	
 	// make sure the user data is being passed through
-	console.log(userObject.profiles);
+	// console.log(userObject.profiles);
 
 	// select some HTML elements by id
 	var userName   = document.getElementById('newUserName');
@@ -114,7 +118,7 @@ function signOut() {
 
 
 // Event listeners for buttons
-document.getElementById('registerButton').addEventListener('click', showProfile, false);
+document.getElementById('registerButton').addEventListener('click', register, false);
 document.getElementById('showRegisterButton').addEventListener('click', showRegistrationForm, false);
 document.getElementById('showLoginButton').addEventListener('click', showLoginForm, false);
 document.getElementById('signOutButton').addEventListener('click', signOut, false);
