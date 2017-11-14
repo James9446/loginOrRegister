@@ -26,9 +26,8 @@ var userObject = {
 		for(var i = 0; i < userGenderEls.length; i++) {
 			// if the radio was selected by the user, do this
 			if(userGenderEls[i].checked) {
-				// set value of answer 3 to the value in the radio item
+				// If a radio is checked reset value to unchecked
 				userGenderEls[i].checked = false;
-				// userGender.checked = false 
 			}
 		}
 	},
@@ -55,7 +54,7 @@ var userObject = {
 		for(var i = 0; i < userGenderEls.length; i++) {
 			// if the radio was selected by the user, do this
 			if(userGenderEls[i].checked) {
-				// set value of answer 3 to the value in the radio item
+				// set value of answer to the value in the radio item
 				userGender = userGenderEls[i].value;
 			}
 		}
@@ -72,7 +71,7 @@ function validatePassword (password) {
 	}
 }
 
-// ---=== This function's main purpose is to do all the validation checks before adding a new profile object ===---
+// ---=== The register() function's main purpose is to do all the validation checks before adding a new profile object to userObject.profiles ===---
 function register() {
 	var newProfile = userObject.getUserData();
 	var	confirmPassword  = document.getElementById('confirm-password').value;
