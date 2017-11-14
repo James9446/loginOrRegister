@@ -13,15 +13,24 @@ var userObject = {
 		this.profiles.unshift(obj);
 	},
 	resetUserData: function() {
+		
 		document.getElementById('user-first-name').value = '';
 		document.getElementById('user-last-name').value = '';
 		// store elements by class for radios and select - will loop through later to find user selection
-		document.getElementsByClassName("user-gender");
+		var userGenderEls = document.getElementsByClassName("user-gender");
 		document.getElementById('user-phone').value = '';
 		document.getElementById('user-email').value = '';
 		document.getElementById('choose-username').value = '';
 		document.getElementById('choose-password').value = '';
 		document.getElementById('confirm-password').value = '';
+		for(var i = 0; i < userGenderEls.length; i++) {
+			// if the radio was selected by the user, do this
+			if(userGenderEls[i].checked) {
+				// set value of answer 3 to the value in the radio item
+				userGenderEls[i].checked = false;
+				// userGender.checked = false 
+			}
+		}
 	},
 	resetLoginData: function() {
 		document.getElementById('username').value = '';
@@ -63,26 +72,67 @@ function validatePassword (password) {
 	}
 }
 
+// ---=== This function's main purpose is to do all the validation checks before adding a new profile object ===---
 function register() {
 	var newProfile = userObject.getUserData();
 	var	confirmPassword  = document.getElementById('confirm-password').value;
+
+	// ---=== Conditions to check that each form has been filled out ===--- // 
+	if (newProfile.firstName === '') {
+		return alert("Please enter your first name")
+	}
+
+	if (newProfile.lastName === '') {
+		return alert("Please enter your last name")
+	}
+
+	if (newProfile.email === '') {
+			return alert("Please enter your email address")
+		}
+
+	if (newProfile.number.length !== 10) {
+		return alert("Please enter a valid 10 digit phone number with no spaces or symbols \n i.e. 5551235555")
+	}
+
+	if (newProfile.username === '') {
+		return alert("Please enter a username")
+	}
+
+	// ---=== checks that username doesn't already exist ===---
 	for (var i = 0; i < userObject.profiles.length; i++) {
 		if (newProfile.username === userObject.profiles[i].username) {
 			document.getElementById('choose-username').value = '';
 			return alert("Sorry the username " + newProfile.username + ", has already been taken. Please select another!");
 		}
 	}
+	// ---=== Checks that password is at least 6 characters ===---
 	if (!validatePassword(newProfile.password)) {
-		return alert("This not a valid password. \nYour password must be at least 6 characters long.");
+		return alert("Please enter a valid password. \nYour password must be at least 6 characters long.");
 	}
+	// ---=== Checks that password entry has been confirmed ===--- 
 	if (newProfile.password !== confirmPassword) {
 		document.getElementById('confirm-password').value = '';
-		return alert("Your confirm password entry did not match your password");
+		return alert("Please confirm password");
 	}
+
+	// ---=== If everything passes then the new object is added to the userObject.profiles array ===---
 	userObject.addProfile(newProfile);
+
+	// then the register input forms are reset
 	userObject.resetUserData();
+	// then the login input forms are reset
 	userObject.resetLoginData();
+
+	// Finally the show profile function is called
 	showProfile();
+}
+
+function phoneNumberDisplay(num) {
+	num = num.toString();
+	var first = num.slice(0, 3);
+	var second = num.slice(3, 6);
+	var third = num.slice(6,10);
+	return "(" + first + ") " + second + "-" + third;
 }
 
 function showProfile(index) {
@@ -97,10 +147,10 @@ function showProfile(index) {
 	var username   = document.getElementById('newUsername');
 
 	// change the text of these variables using the userProfile object
-	userName.innerText   = "Welcome " + userObject.profiles[index].firstName + " " + userObject.profiles[index].lastName;
+	userName.innerText   = "Welcome " + userObject.profiles[index].firstName.toUpperCase() + " " + userObject.profiles[index].lastName.toUpperCase();
 	userGender.innerText = "Gender: " + userObject.profiles[index].gender;
 	userEmail.innerText  = "Email: " + userObject.profiles[index].email;
-	userPhone.innerText  = "Phone: " + userObject.profiles[index].number;
+	userPhone.innerText  = "Phone: " + phoneNumberDisplay(userObject.profiles[index].number);
 	username.innerText   = "Username: " + userObject.profiles[index].username;
 
 	// hide new login form or profile form
